@@ -13,7 +13,8 @@ const SignIn = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const fromWhere = location?.state || '/'
-
+    
+console.log(location);
 
     const handleSignIn = (e) => {
         e.preventDefault();
