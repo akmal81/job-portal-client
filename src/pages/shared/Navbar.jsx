@@ -13,7 +13,7 @@ const Navbar = () => {
         <NavLink to='/' className='font-light text-sm hover:text-primary'>Home</NavLink>
         <NavLink to='/myApplications' className='font-light text-sm hover:text-primary'>My Applications</NavLink>
         <NavLink to='/addJob' className='font-light text-sm hover:text-primary'>Add Job</NavLink>
-        <NavLink to='/' className='font-light text-sm hover:text-primary'>Candidates</NavLink>
+        <NavLink to='/myPostedJobs' className='font-light text-sm hover:text-primary'>My Posted Jobs</NavLink>
         <NavLink to='/' className='font-light text-sm hover:text-primary'>Blog</NavLink>
     </>
     const handleSignOut = () => {

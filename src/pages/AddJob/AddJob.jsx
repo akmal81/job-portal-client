@@ -1,9 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import useAuth from '../../hooks/useAuth';
 
 const AddJob = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const {user} = useAuth()
     const handleAddJob = e => {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -34,7 +36,9 @@ const AddJob = () => {
                     title: "Job Application submit successful!!! ",
                     showConfirmButton: false,
                     timer: 1500
-                });}
+                });
+                navigate('/myPostedJobs')
+            }
             })
     }
     return (
@@ -196,6 +200,7 @@ const AddJob = () => {
                         <input
                             type="email"
                             name='hr_email'
+                            defaultValue={user.email}
                             placeholder='Hr Email'
                             className='border py-3 px-4 rounded-xl'
                             required />
