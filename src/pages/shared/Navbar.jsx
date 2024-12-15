@@ -11,10 +11,10 @@ const Navbar = () => {
 
     const links = <>
         <NavLink to='/' className='font-light text-sm hover:text-primary'>Home</NavLink>
-        <NavLink to='/findJob' className='font-light text-sm hover:text-primary'>Find a Job</NavLink>
-        <NavLink to='/recruiters' className='font-light text-sm hover:text-primary'>Recruiters</NavLink>
-        <NavLink to='/candidates' className='font-light text-sm hover:text-primary'>Candidates</NavLink>
-        <NavLink to='/blog' className='font-light text-sm hover:text-primary'>Blog</NavLink>
+        <NavLink to='/myApplications' className='font-light text-sm hover:text-primary'>My Applications</NavLink>
+        <NavLink to='/addJob' className='font-light text-sm hover:text-primary'>Add Job</NavLink>
+        <NavLink to='/' className='font-light text-sm hover:text-primary'>Candidates</NavLink>
+        <NavLink to='/' className='font-light text-sm hover:text-primary'>Blog</NavLink>
     </>
     const handleSignOut = () => {
         signOutUser()

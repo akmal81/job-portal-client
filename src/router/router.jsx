@@ -1,34 +1,52 @@
 import {
     createBrowserRouter,
-  } from "react-router-dom";
+} from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Home/Home";
 import Registration from "../pages/Registration/Registration";
 import SignIn from "../pages/SignIn/SignIn";
-import JobDetails from "../pages/Home/JobDetails.jsx/JobDetails";
+import JobDetails from "../pages/JobDetails.jsx/JobDetails";
 import PrivateRouter from "./PrivateRouter";
+import ApplyJob from "../pages/ApplyJob/ApplyJob";
+import MyApplications from "../pages/MyApplications/MyApplications";
+import AddJob from "../pages/AddJob/AddJob";
 
 const router = createBrowserRouter([
     {
-        path:'/',
-        element: <MainLayout/>,
+        path: '/',
+        element: <MainLayout />,
         errorElement: <div><h2>440 Page not Found</h2></div>,
-        children:[
+        children: [
             {
-                path:'/',
-                element:<Home/>
+                path: '/',
+                element: <Home />
             },
             {
-                path:'/jobs/:id',
-                element:<PrivateRouter><JobDetails></JobDetails></PrivateRouter> ,
-                loader: ({params})=> fetch(`http://localhost:5000/jobs/${params.id}`)
+                path:'/addJob',
+                element:<PrivateRouter><AddJob/></PrivateRouter>
             },
             {
-                path:'/registration',
-                element:<Registration/>
+                path: '/jobs/:id',
+                element: <PrivateRouter><JobDetails /></PrivateRouter>,
+                loader: ({ params }) => fetch(`http://localhost:5000/jobs/${params.id}`)
             },
             {
-                path:'/signin',
+                path: '/jobApply/:id',
+                element: <PrivateRouter><ApplyJob /> </PrivateRouter>,
+
+            },
+            
+            {
+                path: '/myApplications',
+                element: <PrivateRouter><MyApplications /> </PrivateRouter>
+
+            },
+            {
+                path: '/registration',
+                element: <Registration />
+            },
+            {
+                path: '/signin',
                 element: <SignIn></SignIn>
             }
         ]
