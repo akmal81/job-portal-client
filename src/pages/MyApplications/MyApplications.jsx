@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 import { title } from 'motion/react-client';
+import axios from 'axios';
 
 const MyApplications = () => {
     const {user} = useAuth();
@@ -13,6 +14,8 @@ const MyApplications = () => {
         .then(data =>{
             setJobs(data);
         })
+       
+        
     },[user.email])
 
     return (

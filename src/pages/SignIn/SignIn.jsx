@@ -3,6 +3,7 @@ import signInAni from '../../assets/lotti/login.json'
 import useAuth from "../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 
 
 
@@ -13,8 +14,8 @@ const SignIn = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const fromWhere = location?.state || '/'
-    
-console.log(location);
+
+ 
 
     const handleSignIn = (e) => {
         e.preventDefault();
@@ -24,6 +25,27 @@ console.log(location);
 
         signInUser(email, password)
             .then((userCredential) => {
+                const user = { email: email };
+                axios.post('http://localhost:5000/jwt', user, {withCredentials: true})
+                .then(res=>{
+                        console.log(res.data);
+                    })
+                    // const user ={email : userCredential.user.email}
+                    // axios.post(`http://localhost:5000/jwt`, user, {withCredentials: true})
+                    // .then(res => console.log(res.data))
+                    // navigate(fromWhere);
+
+
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+            })
+    }
+
+    const handleGoogleSignIn = () => {
+        googleSignInUser()
+            .then((result) => {
                 navigate(fromWhere);
             })
             .catch((error) => {
@@ -32,24 +54,13 @@ console.log(location);
             })
     }
 
-    const handleGoogleSignIn = () =>{
-        googleSignInUser()
-        .then((result) =>{
-            navigate(fromWhere);
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-        })
-    }
-
     return (
         <section className='w-8/12 lg:flex mx-auto gap-10 mt-40'>
             <div className='flex-1 flex flex-col items-center justify-center shadow-xl border py-20'>
-            <button onClick={handleGoogleSignIn} className='border py-2 px-6 bg-slate-100 font-bold'>Google</button>
+                <button onClick={handleGoogleSignIn} className='border py-2 px-6 bg-slate-100 font-bold'>Google</button>
                 <form onSubmit={handleSignIn} className='flex flex-col gap-8 w-2/3 mt-6'>
                     <h2 className='text-xl font-semibold text-center'>Login with Email</h2>
-                    
+
                     <div>
                         <input
                             type="text"
@@ -61,13 +72,13 @@ console.log(location);
                     <div className="relative">
                         <input
                             type={
-                                showPassword? 'text':'password'
+                                showPassword ? 'text' : 'password'
                             }
                             name="password"
                             placeholder='Password'
                             className='border py-4 px-4 w-full'
                             required />
-                        <button onClick={(e)=>{e.preventDefault(); setShowPassword(!showPassword)}} className="absolute right-4 top-1/3">
+                        <button onClick={(e) => { e.preventDefault(); setShowPassword(!showPassword) }} className="absolute right-4 top-1/3">
                             {
                                 !showPassword ? <p>Show</p> : <p>Hide</p>
                             }
@@ -79,7 +90,7 @@ console.log(location);
                         type="submit"
                         className='py-3 px-4 bg-primary w-fit text-white font-medium rounded-lg' />
                 </form>
-               
+
             </div>
             <div className='flex-1'>
                 <div className='flex-1'>
